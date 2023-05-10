@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:5253';
+axios.defaults.baseURL = 'https://todoserver2.onrender.com';
 
 // טיפול בשגיאות
 axios.interceptors.response.use(
