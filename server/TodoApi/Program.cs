@@ -19,15 +19,15 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 app.UseCors("CorsPolicy");
 
-if (app.Environment.IsDevelopment())
-{
+// if (app.Environment.IsDevelopment())
+// {
     app.UseSwagger(options => options.SerializeAsV2 = true);
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
         options.RoutePrefix = string.Empty;
     });
-}
+// }
 
 // GET all tasks
 app.MapGet("/items", async (ToDoDbContext context) =>
@@ -61,6 +61,11 @@ app.MapDelete("/items/{id}", async (ToDoDbContext context, int id) =>
     context.Items.Remove(a);
     await context.SaveChangesAsync();
     return Results.NoContent();
+});
+
+app.MapGet("/", async (ToDoDbContext context) =>
+{
+    return await context.Items.ToListAsync();
 });
 
 app.Run();
