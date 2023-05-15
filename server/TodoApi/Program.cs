@@ -17,6 +17,13 @@ builder.Services.AddCors(options =>
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+    await next.Invoke();
+});
+
 app.UseCors("CorsPolicy");
 
 // if (app.Environment.IsDevelopment())
