@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://todoserver2.onrender.com';
+axios.defaults.baseURL = process.env.REACT_APP_API;
 
 // טיפול בשגיאות
 axios.interceptors.response.use(
@@ -26,7 +26,7 @@ export default {
   setCompleted: async (id, isco) => {
     console.log('setCompleted', { id, isco })
     return await (await axios.put(`/items/${id}/${isco}`)).data;
-},
+  },
 
   deleteTask: async (id) => {
     console.log('deleteTask')
